@@ -62,10 +62,7 @@ type NavigationState<Route extends BaseRoute> = {
   routes: Route[];
 };
 
-type TabPressEvent = {
-  defaultPrevented: boolean;
-  preventDefault(): void;
-};
+type TabPressEvent = object;
 
 type TouchableProps<Route extends BaseRoute> = TouchableRippleProps & {
   key: string;
@@ -672,15 +669,7 @@ const NavigationBar = <Route extends BaseRoute>({
   });
 
   const eventForIndex = (index: number) => {
-    const event = {
-      route: navigationState.routes[index],
-      defaultPrevented: false,
-      preventDefault: () => {
-        event.defaultPrevented = true;
-      },
-    };
-
-    return event;
+    return { route: navigationState.routes[index] };
   };
 
   const { routes } = navigationState;

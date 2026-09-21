@@ -3,8 +3,8 @@ import { Platform } from 'react-native';
 import { describe, expect, it, jest } from '@jest/globals';
 import { fireEvent } from '@testing-library/react-native';
 
-import { getTheme } from '../../core/theming';
 import { render, screen } from '../../test-utils';
+import { LightTheme } from '../../theme/schemes';
 import { Palette } from '../../theme/tokens';
 import NavigationBar from '../NavigationBar/NavigationBar';
 import {
@@ -169,7 +169,7 @@ it('renders MD3 state layers on hover, focus and press', async () => {
   // Hovered: 8% state layer.
   await fireEvent(screen.getByTestId('tab-b'), 'hoverIn');
   expect(stateLayer()).toHaveStyle({
-    backgroundColor: getTheme().colors.onSecondaryContainer,
+    backgroundColor: LightTheme.colors.onSecondaryContainer,
     opacity: 0.08,
   });
   await fireEvent(screen.getByTestId('tab-b'), 'hoverOut');
@@ -313,10 +313,10 @@ it('colors the focused tab label with secondary and others with onSurfaceVariant
   );
 
   expect(screen.getAllByText('Alpha').at(-1)).toHaveStyle({
-    color: getTheme().colors.secondary,
+    color: LightTheme.colors.secondary,
   });
   expect(screen.getAllByText('Beta').at(-1)).toHaveStyle({
-    color: getTheme().colors.onSurfaceVariant,
+    color: LightTheme.colors.onSurfaceVariant,
   });
 });
 
@@ -334,7 +334,7 @@ it('renders the active indicator with the secondaryContainer color', async () =>
   );
 
   expect(screen.getByTestId('tab-a-active-indicator')).toHaveStyle({
-    backgroundColor: getTheme().colors.secondaryContainer,
+    backgroundColor: LightTheme.colors.secondaryContainer,
   });
 });
 
@@ -362,7 +362,7 @@ describe('getActiveTintColor', () => {
   `(
     'returns $expected when activeColor: $activeColor',
     ({ activeColor, expected }) => {
-      const theme = getTheme(false);
+      const theme = LightTheme;
       const result = getActiveTintColor({ activeColor, theme });
       expect(result).toBe(expected);
     }
@@ -377,7 +377,7 @@ describe('getInactiveTintColor', () => {
   `(
     'returns $expected when inactiveColor: $inactiveColor',
     ({ inactiveColor, expected }) => {
-      const theme = getTheme(false);
+      const theme = LightTheme;
       const result = getInactiveTintColor({
         inactiveColor,
         theme,
@@ -400,7 +400,7 @@ describe('getLabelColor', () => {
   ])(
     'returns $expected when tintColor: $tintColor, focused: $focused',
     ({ tintColor, focused, expected }) => {
-      const theme = getTheme(false);
+      const theme = LightTheme;
       const result = getLabelColor({
         tintColor: tintColor ?? '',
         hasColor: Boolean(tintColor),

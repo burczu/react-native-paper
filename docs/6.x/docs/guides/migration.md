@@ -125,7 +125,7 @@ The `style.elevation` property is no longer supported. Use the `elevated` prop t
 | `BottomNavigation.SceneMap`, `renderScene`, `onIndexChange`           | render the active scene yourself, alongside the bar                   |
 | `getLazy`, `route.lazy`                                               | removed — the bar no longer owns the scenes                           |
 | `sceneAnimationEnabled`, `sceneAnimationType`, `sceneAnimationEasing`  | removed with the scene container                                      |
-| `shifting`                                                            | removed (it was already a no-op)                                      |
+| `shifting`                                                            | removed (including the active-icon shift and inactive-label transitions) |
 | `barStyle`                                                            | `style`                                                               |
 | n/a                                                                   | new `variant` (`'stacked' \| 'horizontal'`) for the item layout       |
 

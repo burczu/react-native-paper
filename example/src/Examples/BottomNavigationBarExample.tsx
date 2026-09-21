@@ -36,16 +36,14 @@ const BottomNavigationBarExample = createBottomTabNavigator({
   tabBar: ({ navigation, state, descriptors }) => (
     <NavigationBar
       navigationState={state}
-      onTabPress={({ route, preventDefault }) => {
+      onTabPress={({ route }) => {
         const event = navigation.emit({
           type: 'tabPress',
           target: route.key,
           canPreventDefault: true,
         });
 
-        if (event.defaultPrevented) {
-          preventDefault();
-        } else {
+        if (!event.defaultPrevented) {
           // Custom tab bars must target the tab navigator state.
           navigation.dispatch({
             ...CommonActions.navigate(route.name, route.params),
