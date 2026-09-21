@@ -15,8 +15,8 @@ import {
 import { act, fireEvent, userEvent } from '@testing-library/react-native';
 
 import PaperProvider from '../../core/PaperProvider';
-import { getTheme } from '../../core/theming';
 import { render } from '../../test-utils';
+import { LightTheme } from '../../theme/schemes';
 import TooltipCompound from '../Tooltip';
 import Tooltip, { type TooltipTriggerProps } from '../Tooltip/Tooltip';
 
@@ -210,12 +210,12 @@ describe('Tooltip', () => {
         await findByText('some tooltip text');
 
         expect(getTooltipContainer(getByText)).toHaveStyle({
-          backgroundColor: getTheme().colors.inverseSurface,
+          backgroundColor: LightTheme.colors.inverseSurface,
         });
 
         // bodySmall (12sp) text in the inverseOnSurface role.
         expect(getByText('some tooltip text')).toHaveStyle({
-          color: getTheme().colors.inverseOnSurface,
+          color: LightTheme.colors.inverseOnSurface,
           fontSize: 12,
         });
       });
@@ -265,7 +265,8 @@ describe('Tooltip', () => {
 
           await user.longPress(getTrigger(getByText));
 
-          await fireEvent(await findByText('some tooltip text'), 'layout', {
+          const tooltip = await findByText('some tooltip text');
+          await fireEvent(tooltip, 'layout', {
             nativeEvent: {
               layout: { width: TOOLTIP_WIDTH, height: TOOLTIP_HEIGHT },
             },
@@ -286,7 +287,8 @@ describe('Tooltip', () => {
 
           await user.longPress(getTrigger(getByText));
 
-          await fireEvent(await findByText('some tooltip text'), 'layout', {
+          const tooltip = await findByText('some tooltip text');
+          await fireEvent(tooltip, 'layout', {
             nativeEvent: {
               layout: { width: TOOLTIP_WIDTH, height: TOOLTIP_HEIGHT },
             },
@@ -307,7 +309,8 @@ describe('Tooltip', () => {
 
           await user.longPress(getTrigger(getByText));
 
-          await fireEvent(await findByText('some tooltip text'), 'layout', {
+          const tooltip = await findByText('some tooltip text');
+          await fireEvent(tooltip, 'layout', {
             nativeEvent: {
               layout: { width: TOOLTIP_WIDTH, height: TOOLTIP_HEIGHT },
             },
@@ -328,7 +331,8 @@ describe('Tooltip', () => {
 
           await user.longPress(getTrigger(getByText));
 
-          await fireEvent(await findByText('some tooltip text'), 'layout', {
+          const tooltip = await findByText('some tooltip text');
+          await fireEvent(tooltip, 'layout', {
             nativeEvent: {
               layout: { width: TOOLTIP_WIDTH, height: TOOLTIP_HEIGHT },
             },
@@ -489,7 +493,8 @@ describe('Tooltip', () => {
           await fireEvent(getTrigger(getByText), 'pointerEnter');
           await runTimers(500);
 
-          await fireEvent(await findByText('some tooltip text'), 'layout', {
+          const tooltip = await findByText('some tooltip text');
+          await fireEvent(tooltip, 'layout', {
             nativeEvent: {
               layout: { width: TOOLTIP_WIDTH, height: TOOLTIP_HEIGHT },
             },
@@ -511,7 +516,8 @@ describe('Tooltip', () => {
           await fireEvent(getTrigger(getByText), 'pointerEnter');
           await runTimers(500);
 
-          await fireEvent(await findByText('some tooltip text'), 'layout', {
+          const tooltip = await findByText('some tooltip text');
+          await fireEvent(tooltip, 'layout', {
             nativeEvent: {
               layout: { width: TOOLTIP_WIDTH, height: TOOLTIP_HEIGHT },
             },
@@ -533,7 +539,8 @@ describe('Tooltip', () => {
           await fireEvent(getTrigger(getByText), 'pointerEnter');
           await runTimers(500);
 
-          await fireEvent(await findByText('some tooltip text'), 'layout', {
+          const tooltip = await findByText('some tooltip text');
+          await fireEvent(tooltip, 'layout', {
             nativeEvent: {
               layout: { width: TOOLTIP_WIDTH, height: TOOLTIP_HEIGHT },
             },
@@ -555,7 +562,8 @@ describe('Tooltip', () => {
           await fireEvent(getTrigger(getByText), 'pointerEnter');
           await runTimers(500);
 
-          await fireEvent(await findByText('some tooltip text'), 'layout', {
+          const tooltip = await findByText('some tooltip text');
+          await fireEvent(tooltip, 'layout', {
             nativeEvent: {
               layout: { width: TOOLTIP_WIDTH, height: TOOLTIP_HEIGHT },
             },
@@ -680,15 +688,15 @@ describe('Tooltip.Rich', () => {
       await user.press(getTrigger(getByText));
 
       expect(getByText('Heading')).toHaveStyle({
-        color: getTheme().colors.onSurfaceVariant,
+        color: LightTheme.colors.onSurfaceVariant,
       });
       expect(getByText('Body text')).toHaveStyle({
-        color: getTheme().colors.onSurfaceVariant,
+        color: LightTheme.colors.onSurfaceVariant,
       });
 
       // Surface (container) uses the surfaceContainer color.
       expect(getSurface(getByText)).toHaveStyle({
-        backgroundColor: getTheme().colors.surfaceContainer,
+        backgroundColor: LightTheme.colors.surfaceContainer,
       });
     });
 
