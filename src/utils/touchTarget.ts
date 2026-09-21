@@ -19,6 +19,9 @@ export const MIN_TOUCH_TARGET_SIZE = 48;
  * Note that on Android a child's `hitSlop` cannot extend past its parent's
  * bounds, so a control placed in a tightly clipped container may still
  * receive a smaller effective target.
+ * On React Native Web, `Pressable` does not currently expand the DOM hit area
+ * from `hitSlop` ([implementation](https://github.com/necolas/react-native-web/blob/master/packages/react-native-web/src/exports/Pressable/index.js));
+ * use padding on a web wrapper when a 48dp target is required there.
  */
 export const getMinTouchTargetHitSlop = (size: number): Insets | undefined => {
   const inset = (MIN_TOUCH_TARGET_SIZE - size) / 2;
