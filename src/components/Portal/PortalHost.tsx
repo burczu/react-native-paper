@@ -51,7 +51,9 @@ export default class PortalHost extends React.Component<Props> {
     const queue = this.queue;
 
     while (queue.length && manager) {
-      const action = queue.pop();
+      // Replay in the order the operations were recorded, otherwise portals
+      // that mounted in the same commit end up stacked in reverse.
+      const action = queue.shift();
       if (action) {
         switch (action.type) {
           case 'mount':
@@ -90,7 +92,9 @@ export default class PortalHost extends React.Component<Props> {
     } else {
       const op: Operation = { type: 'mount', key, children };
       const index = this.queue.findIndex(
-        (o) => o.type === 'mount' || (o.type === 'update' && o.key === key)
+        (o) =>
+          (o.type === 'mount' && o.key === key) ||
+          (o.type === 'update' && o.key === key)
       );
 
       if (index > -1) {

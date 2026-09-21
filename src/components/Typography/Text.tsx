@@ -25,6 +25,9 @@ export type Props<T> = React.ComponentProps<typeof NativeText> & {
    *  Label:  `labelLarge`, `labelMedium`, `labelSmall`
    *
    *  Body: `bodyLarge`, `bodyMedium`, `bodySmall`
+   *
+   *  Each variant also has an `Emphasized` counterpart with a heavier font weight.
+   *  e.g. `displayLargeEmphasized`, `bodyMediumEmphasized` etc.
    */
   variant?: VariantProp<T>;
   children: React.ReactNode;
@@ -124,7 +127,7 @@ const Text = ({
         textStyle = [style, font];
       }
 
-      // Case two:  Nested `Text` has specified `styles` which intefere
+      // Case two:  Nested `Text` has specified `styles` which interfere
       //            with font properties, from the parent's `variant`. For example:
       //              <Chip>
       //                <Text style={{fontSize: 30}}>Nested</Text>
